@@ -1,55 +1,38 @@
 import express from "express";
-const todosrouter = express.Router();
+const todosRouter = express.Router();
 
  
-// reading all todo items
-todosrouter.get("/api/todos", (req, res) => {
-  res.send("Get All TODOS");
+// GET all todos
+todosRouter.get("/todos", (req, res) => {
+  res.send("All Todos");
 });
- 
- 
-// getting specific todo item with id as parameter
-todosrouter.get("/api/todos/:id", (req, res) => {
-  // get the todo id from the url
+
+// GET a specific todo by id
+todosRouter.get("/todos/:id", (req, res) => {
   const todoId = req.params.id;
- 
- 
-  res.send(`Gettomg todo with id ${todoId}`);
+  res.send(`Getting TODO with id ${todoId}`);
 });
- 
- 
-// creating a new todo item
-todosrouter.post("/api/todos", (req, res) => {
-  // get the data from the request body
-  const data = req.body;
- 
-  console.log(data);
- 
-  // send back the data
-  res.json({
-    status: 200,
-  });
+
+// POST to create a new todo
+todosRouter.post("/todos", (req, res) => {
+  const   newTodo = {
+    id: 1,
+    title: "Todo",
+    description: "My todo",
+  };
+  res.json(newTodo);
 });
- 
- 
-// updating a todo item
-todosrouter.put("/api/todos/:id", (req, res) => {
-  // get the todo id from the url
+
+// PUT to update a todo by id
+todosRouter.put("/todos/:id", (req, res) => {
   const todoId = req.params.id;
-  const data = req.body;
- 
- 
-  res.json({ ...data, id: todoId });
+  res.send(`Updating TODO with id ${todoId}`);
 });
- 
- 
-// deleting a todo item
-todosrouter.delete("/api/todos/:id", (req, res) => {
-  // get the todo id from the url
+
+// DELETE a specific todo by id
+todosRouter.delete("/todos/:id", (req, res) => {
   const todoId = req.params.id;
- 
- 
-  res.send(`Deleting todo with id ${todoId}`);
+  res.send(`Deleting TODO with id ${todoId}`);
 });
- 
-export default todosrouter;
+
+export default todosRouter;
